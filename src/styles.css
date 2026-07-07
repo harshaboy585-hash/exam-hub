@@ -1,0 +1,145 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * TechMaster — design tokens
+ * Navy header, white content, teal PDF CTA, gold online-exam CTA, blue subject cards.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-sans: "Noto Sans Sinhala", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Noto Sans Sinhala", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-teal-cta: var(--teal-cta);
+  --color-teal-cta-foreground: var(--teal-cta-foreground);
+  --color-gold-cta: var(--gold-cta);
+  --color-gold-cta-foreground: var(--gold-cta-foreground);
+  --color-subject-blue: var(--subject-blue);
+  --color-subject-blue-foreground: var(--subject-blue-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --shadow-soft: 0 4px 20px -8px oklch(0.2 0.05 265 / 0.15);
+  --shadow-card: 0 8px 30px -12px oklch(0.2 0.05 265 / 0.2);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.03 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 265);
+
+  /* Primary = navy */
+  --primary: oklch(0.25 0.06 265);
+  --primary-foreground: oklch(0.98 0.01 250);
+
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.25 0.06 265);
+  --muted: oklch(0.96 0.01 250);
+  --muted-foreground: oklch(0.5 0.03 260);
+  --accent: oklch(0.94 0.03 240);
+  --accent-foreground: oklch(0.25 0.06 265);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.98 0.01 250);
+  --border: oklch(0.9 0.02 255);
+  --input: oklch(0.92 0.02 255);
+  --ring: oklch(0.55 0.15 245);
+
+  /* Brand tokens */
+  --navy: oklch(0.22 0.07 265);
+  --navy-foreground: oklch(0.98 0.01 250);
+  --teal-cta: oklch(0.62 0.13 175);
+  --teal-cta-foreground: oklch(1 0 0);
+  --gold-cta: oklch(0.78 0.16 85);
+  --gold-cta-foreground: oklch(0.2 0.04 60);
+  --subject-blue: oklch(0.95 0.04 240);
+  --subject-blue-foreground: oklch(0.22 0.07 265);
+  --success: oklch(0.62 0.15 155);
+  --success-foreground: oklch(1 0 0);
+
+  --chart-1: oklch(0.55 0.15 245);
+  --chart-2: oklch(0.62 0.13 175);
+  --chart-3: oklch(0.78 0.16 85);
+  --chart-4: oklch(0.62 0.15 155);
+  --chart-5: oklch(0.58 0.22 27);
+}
+
+.dark {
+  --background: oklch(0.15 0.03 265);
+  --foreground: oklch(0.98 0.01 250);
+  --card: oklch(0.22 0.05 265);
+  --card-foreground: oklch(0.98 0.01 250);
+  --popover: oklch(0.22 0.05 265);
+  --popover-foreground: oklch(0.98 0.01 250);
+  --primary: oklch(0.98 0.01 250);
+  --primary-foreground: oklch(0.22 0.05 265);
+  --secondary: oklch(0.28 0.04 260);
+  --secondary-foreground: oklch(0.98 0.01 250);
+  --muted: oklch(0.28 0.04 260);
+  --muted-foreground: oklch(0.7 0.03 258);
+  --accent: oklch(0.28 0.04 260);
+  --accent-foreground: oklch(0.98 0.01 250);
+  --destructive: oklch(0.7 0.19 22);
+  --destructive-foreground: oklch(0.98 0.01 250);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.55 0.15 245);
+  --navy: oklch(0.18 0.06 265);
+  --subject-blue: oklch(0.28 0.05 245);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@utility btn-teal {
+  background-color: var(--color-teal-cta);
+  color: var(--color-teal-cta-foreground);
+  &:hover { filter: brightness(0.95); }
+}
+@utility btn-gold {
+  background-color: var(--color-gold-cta);
+  color: var(--color-gold-cta-foreground);
+  &:hover { filter: brightness(0.95); }
+}

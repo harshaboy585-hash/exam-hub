@@ -24,6 +24,7 @@ import { Route as ToolsCalculatorsRouteImport } from './routes/tools.calculators
 import { Route as SubjectsSlugRouteImport } from './routes/subjects.$slug'
 import { Route as ExamResultResultIdRouteImport } from './routes/exam-result.$resultId'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as SubjectsSlugIndexRouteImport } from './routes/subjects.$slug.index'
 import { Route as ExamPaperIdIndexRouteImport } from './routes/exam.$paperId.index'
 import { Route as SubjectsSlugShortNotesRouteImport } from './routes/subjects.$slug.short-notes'
 import { Route as SubjectsSlugPastPapersRouteImport } from './routes/subjects.$slug.past-papers'
@@ -106,6 +107,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubjectsSlugIndexRoute = SubjectsSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SubjectsSlugRoute,
+} as any)
 const ExamPaperIdIndexRoute = ExamPaperIdIndexRouteImport.update({
   id: '/exam/$paperId/',
   path: '/exam/$paperId/',
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/subjects/$slug/past-papers': typeof SubjectsSlugPastPapersRoute
   '/subjects/$slug/short-notes': typeof SubjectsSlugShortNotesRoute
   '/exam/$paperId/': typeof ExamPaperIdIndexRoute
+  '/subjects/$slug/': typeof SubjectsSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -167,7 +174,6 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof LeaderboardRoute
   '/admin/login': typeof AdminLoginRoute
   '/exam-result/$resultId': typeof ExamResultResultIdRoute
-  '/subjects/$slug': typeof SubjectsSlugRouteWithChildren
   '/tools/calculators': typeof ToolsCalculatorsRoute
   '/tools/converters': typeof ToolsConvertersRoute
   '/tools/diagrams': typeof ToolsDiagramsRoute
@@ -182,6 +188,7 @@ export interface FileRoutesByTo {
   '/subjects/$slug/past-papers': typeof SubjectsSlugPastPapersRoute
   '/subjects/$slug/short-notes': typeof SubjectsSlugShortNotesRoute
   '/exam/$paperId': typeof ExamPaperIdIndexRoute
+  '/subjects/$slug': typeof SubjectsSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -206,6 +213,7 @@ export interface FileRoutesById {
   '/subjects/$slug/past-papers': typeof SubjectsSlugPastPapersRoute
   '/subjects/$slug/short-notes': typeof SubjectsSlugShortNotesRoute
   '/exam/$paperId/': typeof ExamPaperIdIndexRoute
+  '/subjects/$slug/': typeof SubjectsSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -231,6 +239,7 @@ export interface FileRouteTypes {
     | '/subjects/$slug/past-papers'
     | '/subjects/$slug/short-notes'
     | '/exam/$paperId/'
+    | '/subjects/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -239,7 +248,6 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/admin/login'
     | '/exam-result/$resultId'
-    | '/subjects/$slug'
     | '/tools/calculators'
     | '/tools/converters'
     | '/tools/diagrams'
@@ -254,6 +262,7 @@ export interface FileRouteTypes {
     | '/subjects/$slug/past-papers'
     | '/subjects/$slug/short-notes'
     | '/exam/$paperId'
+    | '/subjects/$slug'
   id:
     | '__root__'
     | '/'
@@ -277,6 +286,7 @@ export interface FileRouteTypes {
     | '/subjects/$slug/past-papers'
     | '/subjects/$slug/short-notes'
     | '/exam/$paperId/'
+    | '/subjects/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -406,6 +416,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subjects/$slug/': {
+      id: '/subjects/$slug/'
+      path: '/'
+      fullPath: '/subjects/$slug/'
+      preLoaderRoute: typeof SubjectsSlugIndexRouteImport
+      parentRoute: typeof SubjectsSlugRoute
+    }
     '/exam/$paperId/': {
       id: '/exam/$paperId/'
       path: '/exam/$paperId'
@@ -456,6 +473,7 @@ interface SubjectsSlugRouteChildren {
   SubjectsSlugModelPapersRoute: typeof SubjectsSlugModelPapersRoute
   SubjectsSlugPastPapersRoute: typeof SubjectsSlugPastPapersRoute
   SubjectsSlugShortNotesRoute: typeof SubjectsSlugShortNotesRoute
+  SubjectsSlugIndexRoute: typeof SubjectsSlugIndexRoute
 }
 
 const SubjectsSlugRouteChildren: SubjectsSlugRouteChildren = {
@@ -463,6 +481,7 @@ const SubjectsSlugRouteChildren: SubjectsSlugRouteChildren = {
   SubjectsSlugModelPapersRoute: SubjectsSlugModelPapersRoute,
   SubjectsSlugPastPapersRoute: SubjectsSlugPastPapersRoute,
   SubjectsSlugShortNotesRoute: SubjectsSlugShortNotesRoute,
+  SubjectsSlugIndexRoute: SubjectsSlugIndexRoute,
 }
 
 const SubjectsSlugRouteWithChildren = SubjectsSlugRoute._addFileChildren(

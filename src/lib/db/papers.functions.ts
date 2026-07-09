@@ -30,7 +30,7 @@ export const listSubjects = createServerFn({ method: "GET" }).handler(async () =
 });
 
 export const getSubjectBySlug = createServerFn({ method: "GET" })
-  .inputValidator((d: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(d))
+  .validator((d: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
     const sb = getPublicServerClient();
     const { data: row, error } = await sb
@@ -64,7 +64,7 @@ const listPapersInput = z.object({
 });
 
 export const listPapers = createServerFn({ method: "GET" })
-  .inputValidator((d: unknown) => listPapersInput.parse(d ?? {}))
+  .validator((d: unknown) => listPapersInput.parse(d ?? {}))
   .handler(async ({ data }) => {
     const sb = getPublicServerClient();
     let subjectId: string | undefined;
@@ -94,7 +94,7 @@ export const listPapers = createServerFn({ method: "GET" })
   });
 
 export const getPaper = createServerFn({ method: "GET" })
-  .inputValidator((d: { paperId: string }) => z.object({ paperId: z.string().uuid() }).parse(d))
+  .validator((d: { paperId: string }) => z.object({ paperId: z.string().uuid() }).parse(d))
   .handler(async ({ data }) => {
     const sb = getPublicServerClient();
     const { data: row, error } = await sb
@@ -112,7 +112,7 @@ export const getPaper = createServerFn({ method: "GET" })
 // Returns questions WITHOUT correct answers for the student
 export const startExam = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: { paperId: string }) => z.object({ paperId: z.string().uuid() }).parse(d))
+  .validator((d: { paperId: string }) => z.object({ paperId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
     const { data: paper, error: pErr } = await context.supabase
       .from("papers")
@@ -148,7 +148,7 @@ const submitInput = z.object({
 
 export const submitExam = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => submitInput.parse(d))
+  .validator((d: unknown) => submitInput.parse(d))
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
 
@@ -231,7 +231,7 @@ export const submitExam = createServerFn({ method: "POST" })
 
 export const getExamResult = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: { resultId: string }) => z.object({ resultId: z.string().uuid() }).parse(d))
+  .validator((d: { resultId: string }) => z.object({ resultId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
     const { data: row, error } = await context.supabase
       .from("exam_results")
@@ -270,7 +270,7 @@ const lbInput = z.object({
 });
 
 export const getLeaderboard = createServerFn({ method: "GET" })
-  .inputValidator((d: unknown) => lbInput.parse(d ?? {}))
+  .validator((d: unknown) => lbInput.parse(d ?? {}))
   .handler(async ({ data }) => {
     const sb = getPublicServerClient();
     let subjectName: string | undefined;
@@ -414,7 +414,7 @@ export const getLeaderboard = createServerFn({ method: "GET" })
 
 // ---------- Download logging ----------
 export const logDownload = createServerFn({ method: "POST" })
-  .inputValidator((d: { paperId: string; userId?: string | null }) =>
+  .validator((d: { paperId: string; userId?: string | null }) =>
     z.object({ paperId: z.string().uuid(), userId: z.string().uuid().nullable().optional() }).parse(d),
   )
   .handler(async ({ data }) => {
